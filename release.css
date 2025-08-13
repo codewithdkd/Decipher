@@ -1,0 +1,356 @@
+
+  * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  /* Fullscreen background */
+  .full-screen-bg {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #5ad2e2, #5cd460); /* dark navy → green */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  justify-content: center;
+  padding: 4px 40px 20px 40px;
+  box-sizing: border-box;
+
+}
+
+/* Only center vertically if the content fits in viewport */
+.full-screen-bg > .outlined-box {
+    margin: auto 0; /* vertical centering when small */
+}
+
+/* If box is taller than screen, align at top */
+@media (max-height: 700px) {
+    .full-screen-bg {
+        align-items: flex-start;
+    }
+    .full-screen-bg > .outlined-box {
+        margin-top: 60px; /* little space below navbar */
+    }
+}
+
+
+
+  /* Fixed Navbar */
+  .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 45px; /* fixed height */
+  background-color: rgb(247, 246, 243, 0.5);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 40px; /* keep padding only on right side */
+  padding-left: 0;     /* remove left padding */
+  color: black;
+  z-index: 1000;
+  transition: background-color 0.3s ease;
+}
+
+.logo {
+  height: 100%; /* match navbar height */
+}
+
+.logo-img {
+  height: 110%;  /* fills navbar height */
+  width: auto;   /* keep aspect ratio */
+  display: block;
+  object-fit: contain;
+  margin:1px 15px;
+}
+
+.navbar:hover {
+  background-color: rgba(219, 218, 212, 1.1); /* Less transparent on hover */
+}
+
+  .navbar svg {
+    stroke: black;
+  }
+
+ 
+  nav {
+    display: flex;
+    gap: 20px;
+  }
+
+  nav a {
+    color: rgb(7, 0, 0);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  nav a:hover {
+    text-decoration: underline;
+  }
+.nav-button {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #ebc379;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.nav-button:hover {
+  background-color: #1a252f;
+}
+
+  /* Hamburger menu button */
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 4px;
+  }
+
+  .menu-toggle span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: black;
+  }
+
+  /* White rectangle outline */
+  .outlined-box {
+    width: 100%;
+    max-width: 1200px;
+    border: 2px solid white;
+    padding: 40px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    min-height: 460px; /* Increased height */
+    background: transparent; /* keep see-through background */
+  
+  }
+
+
+  .filled-content {
+    background-color: rgb(240, 188, 18); /* Solid fill */
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    border-radius: 6px;
+    box-sizing: border-box;
+
+    /* Control size */
+    max-width: 1200px;  /* Width limit */
+    min-height: 300px;  /* Minimum height */
+    height: 400px;      /* Fixed height if you want */
+    margin: auto;       /* Center inside outlined-box */
+}
+
+.text-section {
+    flex: 1;
+}
+
+.image-section {
+    flex: 1;
+}
+
+.image-section img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+
+/* Responsive for mobile */
+@media (max-width: 768px) {
+    .filled-content {
+        flex-direction: column;
+    }
+}
+
+
+  /* Mobile styles */
+  @media (max-width: 768px) {
+    nav {
+      display: none;
+      position: absolute;
+      top: 40px;
+      right: 0;
+      background: #dbdad4;
+      flex-direction: column;
+      width: 100%;
+      padding: 10px 0;
+    }
+
+    nav.show {
+      display: flex;
+    }
+
+    .menu-toggle {
+      display: flex;
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ========================RELEASES======================  */
+ .releases-container {
+  margin-top: 60px; /* or padding-top: 60px; */
+  /* existing styles */
+  background: rgba(244, 223, 175);
+  padding: 15px 40px; /* 20px top/bottom, 40px left/right */
+  border-radius: 10px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.magazine-layout-heading {
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 5px;     /* Reduced top margin */
+  margin-bottom: 0px;
+  color: #2c3e50;
+  font-family: 'Georgia', serif;
+  text-transform: none;
+  border-bottom: none;
+  padding-top: 0px;       /* Ensure no padding on top */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+
+.year-heading {
+  margin: 10px 0 10px;
+  font-size: 1.8rem;
+  color: #333;
+}
+
+.magazine-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 equal columns */
+  gap: 20px;
+  justify-content: start;
+}
+
+/* Tablet: 2 columns */
+@media (max-width: 768px) {
+  .magazine-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile: 1 column */
+@media (max-width: 480px) {
+  .magazine-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.magazine-card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: transparent;
+  overflow: visible;
+}
+
+.magazine-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+   border: 2px solid #D4AC0D; /* gold border */
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: filter 0.3s ease, box-shadow 0.3s ease;
+}
+
+.magazine-card img:hover {
+  filter: brightness(1.1) saturate(1.2);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.magazine-card p {
+  margin-top: 4px;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #333;
+  padding: 10px 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  user-select: none;
+}
+
+
+
+/* Footer */
+
+.custom-footer {
+  display: flex;
+  justify-content: space-between; /* spread left, center, right */
+  align-items: center;
+  margin-top: auto;
+  padding: 1rem 20px; /* keep some side padding */
+  background-color: rgba(219, 218, 212);
+  height: 6px;
+}
+
+.footer-left,
+.footer-center,
+.footer-right {
+  flex: 1;
+}
+
+.footer-left {
+  text-align: left;
+  color: black;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.footer-center {
+  text-align: center;
+color: black;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.footer-right {
+  text-align: right;
+  color: black;
+  font-size: 12px;
+  font-weight: 400;
+}
