@@ -12,6 +12,11 @@
 </head>
 <body>
 
+<div id="mobile-warning">
+  <p>📢 Kindly open this website on a desktop or laptop for better view.</p>
+</div>
+
+
 <!-- Fixed Navbar -->
 <header class="navbar" role="banner">
   <div class="logo">
@@ -262,6 +267,20 @@ document.addEventListener('DOMContentLoaded', loadMagazines);
       menuToggle.setAttribute('aria-expanded', 'false');
     }
   });
+</script>
+
+
+
+<script>
+  function isMobile() {
+    return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+           || window.innerWidth < 768; // also detect small screen width
+  }
+
+  if (isMobile()) {
+    document.getElementById("mobile-warning").style.display = "block";
+    document.body.style.overflow = "hidden"; // Prevent scrolling
+  }
 </script>
 
 </body>
