@@ -1,30 +1,34 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Decipher</title>
+<title>Decipher - Design & Build Division Magazine</title>
+<meta name="description" content="DECIPHER - Quarterly magazine celebrating knowledge, innovation, and workplace culture from Shapoorji Pallonji Design & Build Division">
 <link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <!-- Fixed Navbar -->
-<header class="navbar">
- <div class="logo">
-  <a href="index.html">
-    <img src="img/logo.png" alt="Decipher Logo" class="logo-img">
-  </a>
-</div>
+<header class="navbar" role="banner">
+  <div class="logo">
+    <a href="index.html" aria-label="Go to homepage">
+      <img src="img/logo.png" alt="Decipher Logo" class="logo-img" loading="eager">
+    </a>
+  </div>
 
-  <nav>
-    <a href="#about">About</a>
-    <a href="release.html">Releases</a>
-    <a href="#team">Team</a>
-    <a href="#feedback">Feedback</a>
+  <nav role="navigation" aria-label="Main navigation">
+    <a href="#about" aria-label="About the magazine">About</a>
+    <a href="release.html" aria-label="View all releases">Issues</a>
+    
+    <a href="#feedback" aria-label="Send feedback">Feedback</a>
   </nav>
 
   <!-- Hamburger menu icon -->
-  <div class="menu-toggle" onclick="toggleMenu()">
+  <div class="menu-toggle" onclick="toggleMenu()" role="button" aria-label="Toggle navigation menu" tabindex="0">
     <span></span>
     <span></span>
     <span></span>
@@ -32,58 +36,66 @@
 </header>
 
 <!-- Background + White rectangle -->
-<div class="full-screen-bg">
+<main class="full-screen-bg" role="main">
   <div class="outlined-box">
-  <div class="filled-content">
-   <div class="text-section">
-  <h2>Our Latest Release</h2>
-  <p class="magazine-name">April-June 2025</p>
-  <h3>Volume 2, Issue 1</h3>
-  <ul class="highlights">
-    <li>Cover Story: Innovation in Construction</li>
-    <li>Interview with Project Leaders</li>
-    <li>Upcoming Sustainable Projects</li>
-    <li>Tech Trends Shaping the Industry</li>
-  </ul>
-</div>
+    <div class="filled-content">
+      <div class="text-section">
+        <h2>Our Latest Issue</h2>
+        <p class="magazine-name">April-June 2025</p>
+        <h3>Volume 2, Issue 2</h3>
+        <ul class="highlights" role="list">
+          <li>Annual Operating Plan</li>
+          <li>The Role of communication in Engineering Excellence</li>
+          <li>Identifying Bottlenecks of Integrated Project
+Delivery</li>
+<li>Excavation: The Hidden Volume That Shapes
+Every Project</li>
+          <li>Arambh-Induction Program</li>
+          <li>Trainee Site visit</li>
+          <li>Awards & Achievements</li>
+          <li>Birthdays & Work Anniversaries</li>
+        </ul>
+      </div>
 
-    <div class="image-section">
-      <img src="img/April-June 2025.jpg" alt="Latest Release">
+      <div class="image-section">
+         <a href="https://sdcorporation-my.sharepoint.com/:b:/g/personal/niklesh_wadhwa_shapoorji_com/Ed1fGkje7JVGuynf9fhJyQ0B-7qD2A-BAZ7mTZ8bxXePjQ" 
+   aria-label="View April-June 2025 issue" target="_blank" class="image-link">
+    <img src="img/April-June 2025.jpg" alt="Latest Release Cover - April-June 2025" loading="eager">
+</a>
+      </div>
     </div>
   </div>
-</div>
-</div>
+</main>
 
 <!-- ABOUT THE MAGAZINE -->
-<section id="about"class="about-magazine">
+<section id="about" class="about-magazine" role="region" aria-labelledby="about-heading">
   <div class="about-container">
-    <h2>About the Magazine</h2>
+    <h2 id="about-heading">About the Magazine</h2>
     <p class="about-magazine">
-  Launched by the <em>Design &amp; Build Division</em> of <em>Shapoorji Pallonji</em> to mark the milestone of 
-  <em>25 successful years</em>, <strong>DECIPHER</strong> is our quarterly magazine that celebrates 
-  <em>knowledge</em>, <em>innovation</em>, and the vibrant culture of our workplace. 
-  It features a rich mix of stories, including <em>Cognizance</em>, <em>Industry Insights</em>, 
-  <em>Digitization in the Construction Industry</em>, <em>Technology and Innovation</em>, and 
-  <em>Training &amp; Development Experiences</em>.  
-  Beyond industry expertise, <strong>DECIPHER</strong> also captures the heart of our organization — from 
-  travel tales to moments that strengthen our workplace culture.  
-  Whether it’s <em>birthday celebrations</em>, <em>festive gatherings</em>, or initiatives to 
-  enhance workflow, every issue reflects the <em>people</em>, <em>progress</em>, and 
-  <em>passion</em> that define our journey.
-</p>
+      Launched by the <em>Design &amp; Build Division</em> of <em>Shapoorji Pallonji</em> to mark the milestone of 
+      <em>25 successful years</em>, <strong>DECIPHER</strong> is our quarterly magazine that celebrates 
+      <em>knowledge</em>, <em>innovation</em>, and the vibrant culture of our workplace. 
+      It features a rich mix of stories, including <em>Cognizance</em>, <em>Industry Insights</em>, 
+      <em>Digitization in the Construction Industry</em>, <em>Technology and Innovation</em>, and 
+      <em>Training &amp; Development Experiences</em>.  
+      Beyond industry expertise, <strong>DECIPHER</strong> also captures the heart of our organization — from 
+      travel tales to moments that strengthen our workplace culture.  
+      Whether it's <em>birthday celebrations</em>, <em>festive gatherings</em>, or initiatives to 
+      enhance workflow, every issue reflects the <em>people</em>, <em>progress</em>, and 
+      <em>passion</em> that define our journey.
+    </p>
   </div>
 </section>
 
 <!-- OUR RELEASES SECTION -->
-<section class="our-releases">
-  <h2>Our Releases</h2>
+<section class="our-releases" role="region" aria-labelledby="releases-heading">
+  <h2 id="releases-heading">Our Previous Issues</h2>
   <div class="releases-container">
-    <div class="magazine-grid" id="release-grid">
+    <div class="magazine-grid" id="release-grid" role="grid" aria-label="Magazine releases">
       <!-- Loaded dynamically -->
     </div>
   </div>
 </section>
-
 
 <script>
 async function loadMagazines() {
@@ -157,59 +169,42 @@ async function loadMagazines() {
   }
 }
 
-loadMagazines();
+// Load magazines when DOM is ready
+document.addEventListener('DOMContentLoaded', loadMagazines);
 </script>
 
 
-<!-- OUR TEAM SECTION -->
-<section id="team"  class="team-section">
-  <h2 class="team-heading">Our Experts Team</h2>
-  <p class="team-subheading">
-    Meet the people behind Decipher — passionate individuals driving innovation and creativity.
-  </p>
-
-  <div class="team-grid two-members">
-    <div class="team-member">
-      <img src=" " alt="Person 2" />
-      <h4>Name 2</h4>
-      <p class="role">Post</p>
-      
-    </div>
-
-    <div class="team-member">
-      <img src=" " alt="Person 1" />
-      <h4>Name 1</h4>
-      <p class="role">Post</p>
-   
-    </div>
-  </div>
-</section>
-
 
 <!-- FEEDBACK SECTION -->
-<section id="feedback"  class="feedback-section">
+<section id="feedback" class="feedback-section" role="region" aria-labelledby="feedback-heading">
   <div class="feedback-container">
-    <h2 class="feedback-heading">Send Us Your Feedback</h2>
-    <form action="https://formcarry.com/s/mLZzgjFeOWX" method="POST" enctype="multipart/form-data" class="feedback-form">
+    <h2 id="feedback-heading" class="feedback-heading">Send Us Your Feedback</h2>
+    <p class="feedback-subheading">
+      We value your thoughts and suggestions. Help us improve <strong>Decipher</strong> by sharing your feedback.
+    </p>
+    
+    <form action="https://formcarry.com/s/mLZzgjFeOWX" method="POST" enctype="multipart/form-data" class="feedback-form" role="form" aria-labelledby="feedback-heading">
       <div class="feedback-row">
         <div class="feedback-field">
           <label for="name">Your Name</label>
-          <input type="text" id="name" name="name" placeholder="Your Name" required />
+          <input type="text" id="name" name="name" placeholder="Enter your full name" required aria-required="true" />
         </div>
         <div class="feedback-field">
           <label for="message">Your Message</label>
-          <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+          <textarea id="message" name="message" placeholder="Share your thoughts, suggestions, or feedback..." required aria-required="true"></textarea>
         </div>
         <div class="feedback-field send-btn">
           <label>&nbsp;</label>
-          <button type="submit">Send</button>
+          <button type="submit" aria-label="Send feedback">
+            <span class="button-text">Send Feedback</span>
+            <span class="button-icon">📤</span>
+          </button>
         </div>
       </div>
     </form>
   </div>
 </section>
 
-
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const textarea = document.getElementById('message');
@@ -225,41 +220,48 @@ loadMagazines();
   });
 </script>
 
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const textarea = document.getElementById('message');
-    // Initialize height
-    textarea.style.height = 'auto';
-    textarea.style.height = textarea.scrollHeight + 'px';
-
-    // Auto-expand on input
-    textarea.addEventListener('input', () => {
-      textarea.style.height = 'auto';
-      textarea.style.height = textarea.scrollHeight + 'px';
-    });
-  });
-</script>
-
-
-
- <!-- FOOTER -->
-<footer class="custom-footer">
+<!-- FOOTER -->
+<footer class="custom-footer" role="contentinfo">
   <div class="footer-left">Designed By - Deepak</div>
   <div class="footer-center">
     © 2025 Decipher 
   </div>
-  <div class="footer-right">Design & Build</div>
+  <div class="footer-right">SPCL - Design & Build</div>
 </footer>
-
-
-
-
 
 <script>
   function toggleMenu() {
-    document.querySelector('nav').classList.toggle('show');
+    const nav = document.querySelector('nav');
+    const menuToggle = document.querySelector('.menu-toggle');
+    
+    nav.classList.toggle('show');
+    
+    // Update aria-expanded for accessibility
+    const isExpanded = nav.classList.contains('show');
+    menuToggle.setAttribute('aria-expanded', isExpanded);
   }
+
+  // Close menu when clicking outside
+  document.addEventListener('click', function(event) {
+    const nav = document.querySelector('nav');
+    const menuToggle = document.querySelector('.menu-toggle');
+    
+    if (!nav.contains(event.target) && !menuToggle.contains(event.target)) {
+      nav.classList.remove('show');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Close menu on escape key
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      const nav = document.querySelector('nav');
+      const menuToggle = document.querySelector('.menu-toggle');
+      
+      nav.classList.remove('show');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
 </script>
 
 </body>
