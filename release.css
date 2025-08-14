@@ -409,6 +409,21 @@ nav a:hover::before {
   position: relative;
 }
 
+
+.magazine-card.latest{
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: transparent;
+  overflow: visible;
+  transition: transform 0.3s ease;
+  position: relative;
+}
+
+
+
 .magazine-card:hover {
   transform: translateY(-8px);
 }

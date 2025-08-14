@@ -111,8 +111,9 @@ async function loadMagazines() {
     const parser = new DOMParser();
     const doc = parser.parseFromString(text, 'text/html');
 
-    // Get all magazine cards
-    let allCards = Array.from(doc.querySelectorAll('.magazine-card'));
+    // Get all magazine cards except those marked as .latest
+    let allCards = Array.from(doc.querySelectorAll('.magazine-card'))
+                        .filter(card => !card.classList.contains('latest'));
 
     // Shuffle helper
     function shuffleArray(arr) {
@@ -175,8 +176,8 @@ async function loadMagazines() {
   }
 }
 
-// Load magazines when DOM is ready
 document.addEventListener('DOMContentLoaded', loadMagazines);
+
 </script>
 
 
