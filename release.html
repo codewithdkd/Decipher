@@ -12,6 +12,13 @@
 </head>
 <body>
 
+
+<div id="mobile-warning">
+  <p>📢 Kindly open this website on a desktop or laptop for better view.</p>
+  <img src="img/logo.png" alt="Desktop Only" />
+</div>
+
+
 <!-- Fixed Navbar -->
 <header class="navbar" role="banner">
   <div class="logo">
@@ -130,6 +137,20 @@
       menuToggle.setAttribute('aria-expanded', 'false');
     }
   });
+</script>
+
+
+
+<script>
+  function isMobile() {
+    return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+           || window.innerWidth < 768;
+  }
+
+  if (isMobile()) {
+    document.getElementById("mobile-warning").style.display = "block";
+    document.body.style.overflow = "hidden";
+  }
 </script>
 
 </body>

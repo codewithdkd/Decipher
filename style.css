@@ -26,9 +26,16 @@ body {
   color: black;
   font-size: 1.2rem;
   text-align: center;
-  padding-top: 30vh;
+  padding-top: 20vh;
   z-index: 9999;
 }
+
+#mobile-warning img {
+  margin-top: 20px;
+  max-width: 200px; /* prevent image from being too large */
+  height: auto;
+}
+
 
 
 
