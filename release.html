@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Decipher - All Issues</title>
+<meta name="description" content="Browse all published issues of DECIPHER magazine from Shapoorji Pallonji Design & Build Division">
+<link rel="stylesheet" href="release.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/favicon.png">
+</head>
+<body>
+
+<!-- Fixed Navbar -->
+<header class="navbar" role="banner">
+  <div class="logo">
+    <a href="index.html" aria-label="Go to homepage">
+      <img src="img/logo.png" alt="Decipher Logo" class="logo-img" loading="eager">
+    </a>
+  </div>
+
+  <nav role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="nav-button" aria-label="Return to homepage">Home</a>
+  </nav>
+
+  <!-- Hamburger menu icon -->
+  <div class="menu-toggle" onclick="toggleMenu()" role="button" aria-label="Toggle navigation menu" tabindex="0">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</header>
+
+<!-- Background + White rectangle -->
+<main class="full-screen-bg" role="main">
+  <div class="releases-container">
+    <h2 class="magazine-layout-heading" id="releases-heading">Published Magazines by Year</h2>
+    
+    <!-- For year 2025 -->
+    <section aria-labelledby="year-2025-heading">
+      <h2 class="year-heading" id="year-2025-heading">2025</h2>
+      <div class="magazine-grid" role="grid" aria-label="Magazine editions for 2025">
+        <div class="magazine-card" role="gridcell">
+       <a href="https://sdcorporation-my.sharepoint.com/:b:/g/personal/niklesh_wadhwa_shapoorji_com/EZrrN11DROREmH1WlC5DA3MBwxTDI9bE1Pf04bKoZq6WiA?e=7eviS5A" 
+   aria-label="View Jan-March 2025 issue" 
+   target="_blank">
+            <img src="img/Jan-March 2025.jpg" alt="Jan-March 2025 Cover" loading="lazy">
+          </a>
+          <p>Jan-March 2025</p>
+        </div>
+         <div class="magazine-card latest"   role="gridcell">
+          <a href="https://sdcorporation-my.sharepoint.com/:b:/g/personal/niklesh_wadhwa_shapoorji_com/Ed1fGkje7JVGuynf9fhJyQ0B-7qD2A-BAZ7mTZ8bxXePjQ" aria-label="View April-June 2025 issue" target="_blank">
+            <img src="img/April-June 2025.jpg" alt="April-June 2025 Cover" loading="lazy">
+          </a>
+          <p>April-June 2025</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- For year 2024 -->
+    <section aria-labelledby="year-2024-heading">
+      <h2 class="year-heading" id="year-2024-heading">2024</h2>
+      <div class="magazine-grid" role="grid" aria-label="Magazine editions for 2024">
+        <div class="magazine-card" role="gridcell">
+          <a href="https://sdcorporation-my.sharepoint.com/:b:/g/personal/deepak_kumar8_shapoorji_com/ER2KWcuA8SZIqeftc4IWiRQB2r7uil_vlTIILU9Jzke7eg" aria-label="View Jan-June 2024 issue" target="_blank">
+            <img src="img/Jan-June 2024.jpg" alt="Jan-June 2024 Cover" loading="lazy">
+          </a>
+          <p>Jan-June 2024</p>
+        </div>
+        
+        <div class="magazine-card" role="gridcell">
+          <a href="https://sdcorporation-my.sharepoint.com/:b:/g/personal/niklesh_wadhwa_shapoorji_com/EW9fflCfdwtKpGGzFCLECRIBIYX8dqHARjPuIeD5uw2ADw" aria-label="View July-Sept 2024 issue"  target="_blank">
+            <img src="img/July -Sept 2024.jpg" alt="July-Sept 2024 Cover" loading="lazy">
+          </a>
+          <p>July-Sept 2024</p>
+        </div>
+        
+        <div class="magazine-card" role="gridcell">
+          <a href="https://sdcorporation-my.sharepoint.com/:b:/g/personal/niklesh_wadhwa_shapoorji_com/EZtsv5_NxPlEnEo7IRQZr1wBKI3wS65SmO25Uqut7sBRzw" aria-label="View Oct-Dec 2024 issue" target="_blank">
+            <img src="img/Oct -Dec 2024.jpg" alt="Oct-Dec 2024 Cover" loading="lazy">
+          </a>
+          <p>Oct-Dec 2024</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="custom-footer" role="contentinfo">
+  <div class="footer-left">Design By - Deepak Kr. Deep</div>
+  <div class="footer-center">
+    © 2025 Decipher 
+  </div>
+  <div class="footer-right">SPCL - Design & Build</div>
+</footer>
+
+<script>
+  function toggleMenu() {
+    const nav = document.querySelector('nav');
+    const menuToggle = document.querySelector('.menu-toggle');
+    
+    nav.classList.toggle('show');
+    
+    // Update aria-expanded for accessibility
+    const isExpanded = nav.classList.contains('show');
+    menuToggle.setAttribute('aria-expanded', isExpanded);
+  }
+
+  // Close menu when clicking outside
+  document.addEventListener('click', function(event) {
+    const nav = document.querySelector('nav');
+    const menuToggle = document.querySelector('.menu-toggle');
+    
+    if (!nav.contains(event.target) && !menuToggle.contains(event.target)) {
+      nav.classList.remove('show');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Close menu on escape key
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      const nav = document.querySelector('nav');
+      const menuToggle = document.querySelector('.menu-toggle');
+      
+      nav.classList.remove('show');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+</script>
+
+</body>
+</html>

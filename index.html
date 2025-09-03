@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Decipher - Design & Build Division Magazine</title>
+<meta name="description" content="DECIPHER - Quarterly magazine celebrating knowledge, innovation, and workplace culture from Shapoorji Pallonji Design & Build Division">
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/favicon.png">
+</head>
+<body>
+
+<!-- Fixed Navbar -->
+<header class="navbar" role="banner">
+  <div class="logo">
+    <a href="index.html" aria-label="Go to homepage">
+      <img src="img/logo.png" alt="Decipher Logo" class="logo-img" loading="eager">
+    </a>
+  </div>
+
+  <nav role="navigation" aria-label="Main navigation">
+    <a href="#about" aria-label="About the magazine">About</a>
+    <a href="release.html" aria-label="View all releases">Issues</a>
+    
+   
+  </nav>
+
+  <!-- Hamburger menu icon -->
+  <div class="menu-toggle" onclick="toggleMenu()" role="button" aria-label="Toggle navigation menu" tabindex="0">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</header>
+
+<!-- Background + White rectangle -->
+<main class="full-screen-bg" role="main">
+  <div class="outlined-box">
+    <div class="filled-content">
+      <div class="text-section">
+        <h2>Our Latest Issue</h2>
+        <p class="magazine-name">April-June 2025</p>
+        <h3>Volume 2, Issue 2</h3>
+        <ul class="highlights" role="list">
+          <li>Annual Operating Plan</li>
+          <li>The Role of communication in Engineering Excellence</li>
+          <li>Identifying Bottlenecks of Integrated Project
+Delivery</li>
+<li>Excavation: The Hidden Volume That Shapes
+Every Project</li>
+          <li>Arambh-Induction Program</li>
+          <li>Trainee Site visit</li>
+          <li>Awards & Achievements</li>
+          <li>Birthdays & Work Anniversaries</li>
+        </ul>
+      </div>
+
+      <div class="image-section">
+         <a href="https://sdcorporation-my.sharepoint.com/:b:/g/personal/niklesh_wadhwa_shapoorji_com/Ed1fGkje7JVGuynf9fhJyQ0B-7qD2A-BAZ7mTZ8bxXePjQ" 
+   aria-label="View April-June 2025 issue" target="_blank" class="image-link">
+    <img src="img/April-June 2025.jpg" alt="Latest Release Cover - April-June 2025" loading="eager">
+</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ABOUT THE MAGAZINE -->
+<section id="about" class="about-magazine" role="region" aria-labelledby="about-heading">
+  <div class="about-container">
+    <h2 id="about-heading">About the Magazine</h2>
+    <p class="about-magazine">
+      Launched by the <em>Design &amp; Build Division</em> of <em>Shapoorji Pallonji</em> to mark the milestone of 
+      <em>25 successful years</em>, <strong>DECIPHER</strong> is our quarterly magazine that celebrates 
+      <em>knowledge</em>, <em>innovation</em>, and the vibrant culture of our workplace. 
+      It features a rich mix of stories, including <em>Cognizance</em>, <em>Industry Insights</em>, 
+      <em>Digitization in the Construction Industry</em>, <em>Technology and Innovation</em>, and 
+      <em>Training &amp; Development Experiences</em>.  
+      Beyond industry expertise, <strong>DECIPHER</strong> also captures the heart of our organization — from 
+      travel tales to moments that strengthen our workplace culture.  
+      Whether it's <em>birthday celebrations</em>, <em>festive gatherings</em>, or initiatives to 
+      enhance workflow, every issue reflects the <em>people</em>, <em>progress</em>, and 
+      <em>passion</em> that define our journey.
+    </p>
+  </div>
+</section>
+
+<!-- OUR RELEASES SECTION -->
+<section class="our-releases" role="region" aria-labelledby="releases-heading">
+  <h2 id="releases-heading">Our Previous Issues</h2>
+  <div class="releases-container">
+    <div class="magazine-grid" id="release-grid" role="grid" aria-label="Magazine releases">
+      <!-- Loaded dynamically -->
+    </div>
+    <div class="gallery-cta-wrapper" role="presentation">
+      <a class="gallery-cta-button" href="/release.html" aria-label="View full magazine gallery">Explore All Issues</a>
+    </div>
+  </div>
+</section>
+
+<script>
+async function loadMagazines() {
+  try {
+    const res = await fetch('release.html');
+    const text = await res.text();
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(text, 'text/html');
+
+    // Get all magazine cards except those marked as .latest
+    let allCards = Array.from(doc.querySelectorAll('.magazine-card'))
+                        .filter(card => !card.classList.contains('latest'));
+
+    // Shuffle helper
+    function shuffleArray(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+    }
+
+    shuffleArray(allCards);
+
+    let currentIndex = 0;
+    const grid = document.getElementById('release-grid');
+    let intervalId;
+
+    function showGroup() {
+      grid.classList.add('fade-out');
+
+      setTimeout(() => {
+        grid.innerHTML = '';
+
+        // Get next 4 items
+        for (let i = 0; i < 4; i++) {
+          const card = allCards[(currentIndex + i) % allCards.length].cloneNode(true);
+          grid.appendChild(card);
+        }
+
+        currentIndex += 4;
+
+        // If we've shown all cards, reshuffle for the next cycle
+        if (currentIndex >= allCards.length) {
+          currentIndex = 0;
+          shuffleArray(allCards);
+        }
+
+        grid.classList.remove('fade-out');
+        grid.classList.add('fade-in');
+      }, 150);
+    }
+
+    function startSlideshow() {
+      intervalId = setInterval(showGroup, 3000);
+    }
+
+    function stopSlideshow() {
+      clearInterval(intervalId);
+    }
+
+    // Initial display
+    showGroup();
+    startSlideshow();
+
+    // Pause/resume on hover
+    const section = document.querySelector('.our-releases');
+    section.addEventListener('mouseenter', stopSlideshow);
+    section.addEventListener('mouseleave', startSlideshow);
+
+  } catch (err) {
+    console.error("Error loading magazines:", err);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', loadMagazines);
+
+</script>
+
+<!-- FOOTER -->
+<footer class="custom-footer" role="contentinfo">
+  <div class="footer-left">Design By - Deepak Kr. Deep</div>
+  <div class="footer-center">
+    © 2025 Decipher 
+  </div>
+  <div class="footer-right">SPCL - Design & Build</div>
+</footer>
+
+<script>
+  function toggleMenu() {
+    const nav = document.querySelector('nav');
+    const menuToggle = document.querySelector('.menu-toggle');
+    
+    nav.classList.toggle('show');
+    
+    // Update aria-expanded for accessibility
+    const isExpanded = nav.classList.contains('show');
+    menuToggle.setAttribute('aria-expanded', isExpanded);
+  }
+
+  // Close menu when clicking outside
+  document.addEventListener('click', function(event) {
+    const nav = document.querySelector('nav');
+    const menuToggle = document.querySelector('.menu-toggle');
+    
+    if (!nav.contains(event.target) && !menuToggle.contains(event.target)) {
+      nav.classList.remove('show');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Close menu on escape key
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      const nav = document.querySelector('nav');
+      const menuToggle = document.querySelector('.menu-toggle');
+      
+      nav.classList.remove('show');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+</script>
+
+</body>
+</html>

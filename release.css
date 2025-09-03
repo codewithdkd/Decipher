@@ -1,0 +1,782 @@
+
+  * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #2c3e50;
+  background: #fafafa;
+  overflow-x: hidden;
+}
+
+/* Fullscreen background */
+.full-screen-bg {
+  min-height: 100vh;
+  background: linear-gradient(135deg, rgba(52, 152, 219, 0.8) 0%, rgba(155, 89, 182, 0.6) 50%, rgba(46, 204, 113, 0.8) 100%);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  padding: 80px 20px 20px 20px; /* top padding to clear fixed navbar */
+  box-sizing: border-box;
+  position: relative;
+}
+
+.full-screen-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Only center vertically if the content fits in viewport */
+.full-screen-bg > .outlined-box {
+  margin: auto 0;
+  position: relative;
+  z-index: 2;
+}
+
+/* If box is taller than screen, align at top */
+@media (max-height: 700px) {
+  .full-screen-bg {
+    align-items: flex-start;
+  }
+  .full-screen-bg > .outlined-box {
+    margin-top: 60px;
+  }
+}
+
+/* Fixed Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 20px;
+  padding-left: 0;
+  color: black;
+  z-index: 1000;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+}
+
+.navbar:hover {
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.15);
+}
+
+.logo {
+  height: 100%;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.logo-img {
+  height: 110%;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  margin: 1px 20px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+.navbar svg {
+  stroke: #2c3e50;
+}
+
+nav {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+nav a {
+  color: #2c3e50;
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+nav a {
+  color: #2c3e50;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  position: relative;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+nav a::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #3498db, #9b59b6);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+nav a:hover {
+  color: #3498db;
+  background: rgba(52, 152, 219, 0.1);
+  transform: translateY(-2px);
+}
+
+nav a:hover::before {
+  width: 80%;
+}
+
+/* Hamburger menu button */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 4px;
+  padding: 8px;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+}
+
+.menu-toggle:hover {
+  background: rgba(0,0,0,0.1);
+}
+
+.menu-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #2c3e50;
+  transition: all 0.3s ease;
+  border-radius: 1px;
+}
+
+/* White rectangle outline */
+.outlined-box {
+  width: 100%;
+  max-width: 1200px;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  padding: 40px;
+  box-sizing: border-box;
+  border-radius: 16px;
+  min-height: 460px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.outlined-box:hover {
+  border-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
+}
+
+.filled-content {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 30px;
+  border-radius: 12px;
+  box-sizing: border-box;
+  box-shadow: 
+    0 10px 30px rgba(0,0,0,0.15),
+    0 1px 3px rgba(0,0,0,0.1),
+    inset 0 1px 0 rgba(255,255,255,0.8);
+  max-width: 1200px;
+  min-height: 300px;
+  height: 400px;
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.filled-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #3498db, #9b59b6, #e74c3c, #f39c12);
+  border-radius: 12px 12px 0 0;
+}
+
+.text-section {
+  flex: 1;
+}
+
+.image-section {
+  flex: 1;
+}
+
+.image-section img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.image-section img:hover {
+  transform: scale(1.05);
+}
+
+/* ========================RELEASES======================  */
+.releases-container {
+  margin-top: 60px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 40px;
+  border-radius: 16px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  position: relative;
+}
+
+.releases-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #3498db, #9b59b6, #e74c3c);
+  border-radius: 16px 16px 0 0;
+}
+
+.magazine-layout-heading {
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 40px;
+  color: #2c3e50;
+  font-family: 'Inter', 'Georgia', serif;
+  text-transform: none;
+  border-bottom: none;
+  padding-top: 0;
+  margin-left: auto;
+  margin-right: auto;
+  background: linear-gradient(135deg, #2c3e50, #34495e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+}
+
+.year-heading {
+  margin: 30px 0 20px;
+  font-size: 2rem;
+  color: #34495e;
+  font-weight: 600;
+  position: relative;
+  padding-left: 20px;
+}
+
+.year-heading::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 4px;
+  height: 30px;
+  background: linear-gradient(135deg, #3498db, #9b59b6);
+  transform: translateY(-50%);
+  border-radius: 2px;
+}
+
+.magazine-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+  justify-content: start;
+  margin-bottom: 40px;
+}
+
+.magazine-card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: transparent;
+  overflow: visible;
+  transition: transform 0.3s ease;
+  position: relative;
+}
+
+.magazine-card.latest{
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: transparent;
+  overflow: visible;
+  transition: transform 0.3s ease;
+  position: relative;
+}
+
+.magazine-card:hover {
+  transform: translateY(-8px);
+}
+
+.magazine-card::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: linear-gradient(135deg, #3498db, #9b59b6, #e74c3c);
+  border-radius: 16px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.magazine-card:hover::before {
+  opacity: 0.3;
+}
+
+.magazine-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 2px solid #3498db;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: brightness(1.02) contrast(1.05);
+  position: relative;
+  z-index: 1;
+}
+
+.magazine-card img:hover {
+  filter: brightness(1.1) saturate(1.15) contrast(1.1);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+  transform: scale(1.02);
+  border-color: #9b59b6;
+}
+
+.magazine-card p {
+  margin-top: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #2c3e50;
+  padding: 10px 0;
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  user-select: none;
+  transition: color 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.magazine-card:hover p {
+  color: #3498db;
+}
+
+/* Footer */
+.custom-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding: 15px 30px;
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  color: white;
+  font-size: 15px;
+  font-weight: 400;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+}
+
+.footer-left,
+.footer-center,
+.footer-right {
+  flex: 1;
+}
+
+.footer-left {
+  text-align: left;
+  color: #ecf0f1;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.footer-center {
+  text-align: center;
+  color: #ecf0f1;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.footer-right {
+  text-align: right;
+  color: #ecf0f1;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Add smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Add loading animation for images */
+img {
+  opacity: 0;
+  animation: fadeIn 0.6s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Add subtle hover effects for interactive elements */
+a, button, .menu-toggle {
+  cursor: pointer;
+}
+
+/* Add focus states for accessibility */
+nav a:focus,
+.menu-toggle:focus,
+.nav-button:focus {
+  outline: 2px solid #3498db;
+  outline-offset: 2px;
+}
+
+/* Add section transitions */
+section {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideInUp 0.8s ease-out forwards;
+}
+
+section:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+@keyframes slideInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Add magazine card stagger animation */
+.magazine-card {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: cardSlideIn 0.6s ease-out forwards;
+}
+
+.magazine-card:nth-child(1) { animation-delay: 0.1s; }
+.magazine-card:nth-child(2) { animation-delay: 0.2s; }
+.magazine-card:nth-child(3) { animation-delay: 0.3s; }
+.magazine-card:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes cardSlideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==================== MOBILE RESPONSIVE DESIGN ==================== */
+
+/* Tablet and smaller desktop */
+@media (max-width: 1024px) {
+  .full-screen-bg {
+    padding: 4px 15px 20px 15px;
+  }
+  
+  .releases-container {
+    padding: 30px;
+    margin-top: 50px;
+  }
+  
+  .magazine-layout-heading {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+  
+  .year-heading {
+    font-size: 1.8rem;
+  }
+  
+  .magazine-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+
+/* Mobile landscape */
+@media (max-width: 768px) {
+  .full-screen-bg {
+    padding: 90px 10px 20px 10px; /* ensure clear space under navbar on mobile */
+    background-attachment: scroll;
+  }
+  
+  .releases-container {
+    padding: 20px;
+    margin-top: 40px;
+    border-radius: 12px;
+  }
+  
+  .magazine-layout-heading {
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+  }
+  
+  .year-heading {
+    font-size: 1.6rem;
+    margin: 20px 0 15px;
+    padding-left: 15px;
+  }
+  
+  .year-heading::before {
+    width: 3px;
+    height: 25px;
+  }
+  
+  .magazine-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+  
+  .magazine-card p {
+    font-size: 0.9rem;
+    padding: 8px 0;
+  }
+  
+  /* Mobile navigation */
+  nav {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    flex-direction: column;
+    width: 100%;
+    padding: 20px 0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    border-radius: 0 0 12px 12px;
+  }
+
+  nav.show {
+    display: flex;
+  }
+
+  nav a {
+    padding: 12px 20px;
+    margin: 5px 20px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+  
+  /* Footer mobile - single line */
+  .custom-footer {
+    flex-direction: row;
+    gap: 10px;
+    padding: 15px 20px;
+    text-align: center;
+    flex-wrap: nowrap;
+    overflow: hidden;
+  }
+  
+  .footer-left {
+    text-align: left;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+  }
+  
+  .footer-center {
+    text-align: right;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+  }
+  
+  .footer-right {
+    display: none;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+  .full-screen-bg {
+    padding: 90px 8px 20px 8px;
+  }
+  
+  .releases-container {
+    padding: 15px;
+    margin-top: 30px;
+    border-radius: 8px;
+  }
+  
+  .magazine-layout-heading {
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+  }
+  
+  .year-heading {
+    font-size: 1.4rem;
+    margin: 15px 0 10px;
+    padding-left: 12px;
+  }
+  
+  .year-heading::before {
+    width: 3px;
+    height: 20px;
+  }
+  
+  .magazine-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 25px;
+  }
+  
+  .magazine-card p {
+    font-size: 0.85rem;
+    padding: 6px 0;
+  }
+  
+  /* Logo adjustments */
+  .logo-img {
+    margin: 1px 10px;
+    height: 100%;
+  }
+  
+  /* Navigation adjustments */
+  .navbar {
+    padding-right: 15px;
+  }
+  
+  nav a {
+    padding: 10px 15px;
+    margin: 3px 15px;
+    font-size: 1rem;
+  }
+}
+
+/* Extra small mobile */
+@media (max-width: 360px) {
+  .magazine-layout-heading {
+    font-size: 1.4rem;
+  }
+  
+  .year-heading {
+    font-size: 1.3rem;
+  }
+  
+  .magazine-card p {
+    font-size: 0.8rem;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .magazine-card:hover {
+    transform: none;
+  }
+  
+  .magazine-card img:hover {
+    transform: scale(1.02);
+  }
+  
+  /* Increase touch targets */
+  nav a {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .menu-toggle {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .magazine-card {
+    min-height: 44px;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .logo-img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Print styles */
+@media print {
+  .navbar,
+  .menu-toggle,
+  .custom-footer {
+    display: none;
+  }
+  
+  .full-screen-bg {
+    background: white;
+    min-height: auto;
+  }
+  
+  .releases-container {
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+  
+  .magazine-card img {
+    border: 1px solid #ccc;
+  }
+}
