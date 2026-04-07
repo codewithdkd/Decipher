@@ -1,0 +1,669 @@
+/* Custom Premium FlowPaper-Style PDF Viewer Theme & Animations */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-select: none;
+}
+
+body.flowpaper-theme {
+  font-family: 'Inter', 'Segoe UI', Tahoma, Verdana, sans-serif;
+  color: #333;
+  background: #EDEDED;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: inset 0 0 15px rgba(0, 102, 204, 0.15);
+  /* Suble blue edge glow from target site */
+}
+
+/* ------------------- Top Header (Target Site Style) ------------------- */
+.sp-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background: linear-gradient(to right, #243447, #1E2A38);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+  border-bottom: 1px solid #CC9560;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sp-header:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.sp-header-left {
+  display: flex;
+  align-items: center;
+}
+
+.sp-header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  /* Reduced from 20px */
+  padding-right: 30px;
+  /* Shifted right from 20px */
+}
+
+.nav-button {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  position: relative;
+  padding: 8px;
+  border-radius: 50%;
+  width: 44px;
+  /* Increased from 40px */
+  height: 44px;
+  /* Increased from 40px */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.nav-button::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #3498db, #9b59b6);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav-button:hover {
+  color: #3498db;
+  background: rgba(52, 152, 219, 0.1);
+  transform: translateY(-2px);
+}
+
+.nav-button:hover::before {
+  width: 80%;
+}
+
+.sp-title {
+  padding-left: 20px;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  color: #fff;
+}
+
+.sp-header-divider {
+  width: 1px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 0 15px;
+}
+
+.sp-page-nav {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-size: 12px;
+}
+
+.sp-label {
+  margin-right: 8px;
+  color: #fff;
+  font-weight: 500;
+}
+
+.sp-page-box {
+  background: #D1D1D1;
+  color: #000;
+  font-weight: bold;
+  border-radius: 2px;
+  width: 40px;
+  height: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sp-divider {
+  margin: 0 6px;
+  color: #ccc;
+}
+
+.sp-total {
+  color: #ccc;
+}
+
+/* ------------------- Chevron Side Navigation ------------------- */
+.side-nav-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  pointer-events: none;
+  z-index: 500;
+}
+
+.side-nav-btn {
+  background: rgba(0, 0, 0, 0.05);
+  border: none;
+  width: 60px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: rgba(136, 136, 136, 0.6);
+  transition: all 0.2s ease;
+  pointer-events: auto;
+  border-radius: 8px;
+}
+
+.side-nav-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+  color: rgba(68, 68, 68, 0.9);
+}
+
+.side-nav-btn svg {
+  width: 40px;
+  height: 40px;
+  fill: currentColor;
+}
+
+/* ------------------- Cinematic Stage Main Area ------------------- */
+.viewer-stage {
+  flex: 1;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0;
+  height: 100vh;
+}
+
+/* Loading State */
+.viewer-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 50;
+}
+
+.loader-ring {
+  width: 60px;
+  height: 60px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-top-color: #555;
+  border-radius: 50%;
+  animation: loadSpin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+.viewer-loader p {
+  color: #333;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+@keyframes loadSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Pan & Zoom Wrapper */
+.pan-zoom-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.pan-zoom-container.dragging {
+  cursor: grabbing !important;
+  transition: none !important;
+}
+
+body.is-zoomed .pan-zoom-container {
+  cursor: grab;
+}
+
+/* Core Flipbook Container */
+.flipbook-stage {
+  perspective: 3500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 90%;
+  transform: translateY(15px);
+  /* Reduce distance from navbar by ~1cm */
+}
+
+.flipbook {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.3, 1, 0.3, 1), width 0.4s ease, height 0.4s ease;
+  background-color: transparent;
+}
+
+/* The physical sheets of the magazine */
+.sheet {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+  border: 3px solid transparent;
+  border-left: none;
+  background: transparent;
+  border-radius: 0 8px 8px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.flipbook.is-open .sheet {
+  border-color: #CC9560;
+  background: #CC9560;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.flipbook.single-page .sheet {
+  width: 100%;
+  right: 0;
+  border-radius: 8px;
+}
+
+.sheet.flipped {
+  transform: rotateY(-180deg);
+}
+
+.face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  background-color: #fff;
+  overflow: hidden;
+  display: block;
+  border-radius: 0 6px 6px 0;
+  transition: all 0.4s ease;
+}
+
+.flipbook.is-open .face {
+  top: 5px;
+  bottom: 5px;
+  left: 0;
+  height: auto;
+  width: calc(100% - 5px);
+}
+
+.flipbook.is-open .face.front {
+  box-shadow: 1px 1px 0 #e6e6e6, 2px 2px 0 #fff, 3px 3px 0 #e6e6e6;
+}
+
+.flipbook.is-open .face.back {
+  box-shadow: 1px 1px 0 #e6e6e6, 2px 2px 0 #fff, 3px 3px 0 #e6e6e6;
+}
+
+.face canvas {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  display: block;
+}
+
+/* Spine Shading & Highlights */
+.face.front {
+  transform: rotateY(0deg);
+  background: #fff;
+}
+
+.face.front::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 25px;
+  height: 100%;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 100%);
+  pointer-events: none;
+}
+
+.face.back {
+  transform: rotateY(180deg);
+  background: #fff;
+}
+
+.face.back::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 25px;
+  height: 100%;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 100%);
+  pointer-events: none;
+}
+
+.page-loader {
+  width: 30px;
+  height: 30px;
+  border: 3px solid #eee;
+  border-top-color: #888;
+  border-radius: 50%;
+  animation: loadSpin 0.8s linear infinite;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* ------------------- Bottom Toolbar ------------------- */
+.sp-bottom-toolbar {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.sp-bottom-toolbar.hide-on-idle {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sp-tool-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  cursor: pointer;
+  color: #333;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.sp-tool-btn:hover {
+  color: #000;
+  background: rgba(255, 255, 255, 0.4);
+  transform: scale(1.1);
+}
+
+.sp-tool-btn svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+.sp-tool-divider {
+  width: 1px;
+  height: 20px;
+  background: #aaa;
+  margin: 0 5px;
+}
+
+/* Zoom popup */
+.zoom-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.zoom-slider-popup {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #FFF;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: none;
+  width: 220px;
+  align-items: center;
+  gap: 10px;
+}
+
+.zoom-slider-popup::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px 6px 0 6px;
+  border-style: solid;
+  border-color: #FFF transparent transparent transparent;
+}
+
+.zoom-slider-popup.show {
+  display: flex;
+}
+
+.zoom-range {
+  width: 100%;
+  cursor: pointer;
+  flex: 1;
+}
+
+.zoom-icon {
+  background: none;
+  border: none;
+  font-size: 20px;
+  line-height: 1;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+
+/* ------------------- Thumbnail Sidebar ------------------- */
+.sp-thumbnail-sidebar {
+  position: fixed;
+  top: 40px;
+  left: -180px;
+  width: 180px;
+  height: calc(100vh - 40px);
+  background: #EAEAEA;
+  color: #333;
+  z-index: 1000;
+  transition: left 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.sp-thumbnail-sidebar.open {
+  left: 0;
+}
+
+.sp-thumbnail-header {
+  padding: 15px;
+  border-bottom: 1px solid #CCC;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+
+.sp-thumbnail-header button {
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.sp-thumbnail-grid {
+  flex: 1;
+  overflow-y: auto;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.thumb-item {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.thumb-item canvas {
+  width: 100%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  background: #fff;
+  transition: transform 0.2s ease;
+}
+
+.thumb-item:hover canvas {
+  transform: scale(1.05);
+}
+
+.thumb-item span {
+  font-size: 12px;
+  color: #555;
+  font-weight: bold;
+}
+
+/* ------------------- Logo Card Bottom Right ------------------- */
+.sp-logo-card {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: #FFF;
+  padding: 8px 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  z-index: 1000;
+}
+
+.sp-logo-card img {
+  height: 40px;
+  width: auto;
+  display: block;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+
+  /* Hide unnecessary controls on mobile */
+  #btnGrid,
+  #btnZoomToggle,
+  #btnFullScreen,
+  .zoom-wrapper,
+  .sp-tool-divider {
+    display: none !important;
+  }
+
+  /* Refined Header for Mobile */
+  .sp-header {
+    height: 50px;
+    padding: 0 10px;
+  }
+
+  .sp-title {
+    padding-left: 10px;
+    font-size: 13px;
+    max-width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .sp-header-divider {
+    margin: 0 8px;
+  }
+
+  .sp-header-right {
+    gap: 6px;
+    padding-right: 15px;
+  }
+
+  .nav-button {
+    width: 36px;
+    height: 36px;
+    padding: 6px;
+  }
+
+  /* Reposition Logo Card to Bottom Left on Mobile */
+  .sp-logo-card {
+    display: block !important;
+    right: auto;
+    left: 20px;
+    bottom: -15px;
+    padding: 6px 12px;
+    transform: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .sp-logo-card img {
+    height: 30px;
+  }
+
+  /* Adjust Viewer Stage for Header Height */
+  .viewer-stage {
+    margin-top: 50px;
+    height: calc(100vh - 50px);
+  }
+
+  /* Side navigation adjustments */
+  .side-nav-btn {
+    width: 45px;
+    height: 80px;
+    background: rgba(0, 0, 0, 0.03);
+  }
+
+  .side-nav-btn svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .sp-bottom-toolbar {
+    bottom: 15px;
+  }
+}
